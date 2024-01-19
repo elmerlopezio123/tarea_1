@@ -1,0 +1,48 @@
+import math
+
+def resolver_ecuacion_cuadratica(a, b, c):
+    # Calcula el discriminante
+    discriminante = b**2 - 4*a*c
+
+    # Comprueba si el discriminante es positivo, negativo o cero
+    if discriminante > 0:
+        # Dos soluciones reales distintas
+        x1 = (-b + math.sqrt(discriminante)) / (2*a)
+        x2 = (-b - math.sqrt(discriminante)) / (2*a)
+        return x1, x2
+    elif discriminante == 0:
+        # Una solución real doble
+        x = -b / (2*a)
+        return x,
+    else:
+        # Soluciones complejas (parte imaginaria)
+        parte_real = -b / (2*a)
+        parte_imaginaria = math.sqrt(abs(discriminante)) / (2*a)
+        x1 = complex(parte_real, parte_imaginaria)
+        x2 = complex(parte_real, -parte_imaginaria)
+        return x1, x2
+
+# Función principal para resolver ecuaciones cuadráticas
+def main():
+    while True:
+        # Solicita al usuario ingresar los coeficientes
+        a = float(input("Ingrese el coeficiente a (o 'q' para salir): "))
+        
+        # Permite al usuario salir del bucle
+        if a.lower() == 'q':
+            break
+
+        b = float(input("Ingrese el coeficiente b: "))
+        c = float(input("Ingrese el coeficiente c: "))
+
+        # Resuelve la ecuación cuadrática
+        soluciones = resolver_ecuacion_cuadratica(a, b, c)
+
+        # Muestra las soluciones
+        if len(soluciones) == 1:
+            print(f"La solución es x = {soluciones[0]}")
+        else:
+            print(f"Las soluciones son x1 = {soluciones[0]} y x2 = {soluciones[1]}")
+
+if __name__ == "__main__":
+    main()
